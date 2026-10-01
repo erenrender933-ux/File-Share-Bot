@@ -22,7 +22,7 @@ START_PIC = os.environ.get("START_PIC", "https://ibb.co/gZRGmmxZ")
 START_MSG = (
     "⚡ <b><blockquote>Hey, {first} ~</blockquote></b>\n\n"
     "<b><blockquote>I AM A SIMPLE YET POWERFUL PRIVATE FILE SHARING BOT, "
-    "WORK FOR @Anime_Hub_Tamkl.</blockquote></b>"
+    "WORK FOR @Anime_Hub_Tamil.</blockquote></b>"
 )
 FORCE_MSG = (
     "⚠️ <b>Hey, {first} ~</b>\n\n"
@@ -62,6 +62,7 @@ BOT_COMMANDS = [
     ("start", "Check alive/dead !"),
     ("help", "Instruction for using bot"),
     ("users", "View user setting commands"),
+    ("setverifypic", "Set shortener message picture"),
     ("forcesub", "View forcesub related commands"),
     ("req_fsub", "View request forcesub settings"),
     ("files", "View message/files related settings"),
