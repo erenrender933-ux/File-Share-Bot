@@ -70,7 +70,8 @@ async def verify_gate(client, uid, payload):
     if extra:
         rows.append(extra)
 
-    await _send(client, uid, config.VERIFY_MSG, M(rows), config.VERIFY_PIC)
+    pic = await db.get_setting("verify_pic") or config.VERIFY_PIC
+    await _send(client, uid, config.VERIFY_MSG, M(rows), pic)
     return True
 
 
