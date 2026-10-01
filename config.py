@@ -36,15 +36,15 @@ DELETE_MSG = (
     "So please forward them to any other place for future availability.</b></blockquote>"
 )
 DELETED_MSG = (
-    "<b>Previous message was deleted 🗑</b>\n\n"
-    "<blockquote><b>If you want to get the files again, then click: "
-    "[♻️ Click Here] button below else close this message.</b></blockquote>"
+    "<b><blockquote>ᴘʀᴇᴠɪᴏᴜs ᴍᴇssᴀɢᴇ ᴡᴀs ᴅᴇʟᴇᴛᴇᴅ 🗑</blockquote></b>\n\n"
+    "<blockquote><b>ɪғ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ɢᴇᴛ ᴛʜᴇ ғɪʟᴇs ᴀɢᴀɪɴ, ᴛʜᴇɴ ᴄʟɪᴄᴋ: "
+    "[♻️ ᴄʟɪᴄᴋ ʜᴇʀᴇ] ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴇʟsᴇ ᴄʟᴏsᴇ ᴛʜɪs ᴍᴇssᴀɢᴇ.</b></blockquote>"
 )
 ABOUT_MSG = (
     "🤖 <b>Mʏ Nᴀᴍᴇ:</b> Fɪʟᴇ sᴛᴏʀᴇ ʙᴏᴛ V3 🤖\n"
     "◈ <b>Language:</b> Python 3\n"
     "◈ <b>Library:</b> Pyrogram v2\n"
-    "◈ <b>Database:</b> MongoDB"\n
+    "◈ <b>Database:</b> MongoDB\n"
     "◈ <b>Dᴇᴠᴇʟᴏᴘᴇʀ:@Eren_157</b>"
 )
 
