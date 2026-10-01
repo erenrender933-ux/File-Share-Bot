@@ -22,7 +22,7 @@ START_PIC = os.environ.get("START_PIC", "")
 START_MSG = (
     "⚡ <b>Hey, {first} ~</b>\n\n"
     "<b>I AM A SIMPLE YET POWERFUL PRIVATE FILE SHARING BOT, "
-    "SUPPORT REQUEST FORCESUB.</b>"
+    "WORK FOR @Anime_Hub_Tamkl.</b>"
 )
 FORCE_MSG = (
     "⚠️ <b>Hey, {first} ~</b>\n\n"
@@ -31,12 +31,12 @@ FORCE_MSG = (
     "❗ <b>Facing problems, use:</b> /help"
 )
 DELETE_MSG = (
-    "⚠️ <b><blockquote>Dᴜᴇ ᴛᴏ ᴄᴏᴘʏʀɪɢʜᴛ ɪssᴜᴇs....</blockquote></b>\n\n"
+    "⚠️ <b>Dᴜᴇ ᴛᴏ ᴄᴏᴘʏʀɪɢʜᴛ ɪssᴜᴇs....</b>\n\n"
     "<blockquote><b>ʏᴏᴜʀ ғɪʟᴇs ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ᴡɪᴛʜɪɴ {time}. "
     "sᴏ ᴘʟᴇᴀsᴇ ғᴏʀᴡᴀʀᴅ ᴛʜᴇᴍ ᴛᴏ ᴀɴʏ ᴏᴛʜᴇʀ ᴘʟᴀᴄᴇ ғᴏʀ ғᴜᴛᴜʀᴇ ᴀᴠᴀɪʟᴀʙɪʟɪᴛʏ.</b></blockquote>"
 )
 DELETED_MSG = (
-    "<b><blockquote>ᴘʀᴇᴠɪᴏᴜs ᴍᴇssᴀɢᴇ ᴡᴀs ᴅᴇʟᴇᴛᴇᴅ 🗑</blockquote></b>\n\n"
+    "<b>Pʀᴇᴠɪᴏᴜs ᴍᴇssᴀɢᴇ ᴡᴀs ᴅᴇʟᴇᴛᴇᴅ 🗑</b>\n\n"
     "<blockquote><b>ɪғ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ɢᴇᴛ ᴛʜᴇ ғɪʟᴇs ᴀɢᴀɪɴ, ᴛʜᴇɴ ᴄʟɪᴄᴋ: "
     "[♻️ ᴄʟɪᴄᴋ ʜᴇʀᴇ] ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴇʟsᴇ ᴄʟᴏsᴇ ᴛʜɪs ᴍᴇssᴀɢᴇ.</b></blockquote>"
 )
