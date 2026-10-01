@@ -106,3 +106,4 @@ HELP_TEXTS["cmd"] += (
     "/settutorial &lt;link&gt;\n/setpremium &lt;link&gt;\n"
     "/setverifytime &lt;hours&gt;\n/setmintime &lt;seconds&gt;"
 )
+START_EFFECT = int(os.environ.get("START_EFFECT", "5104841245755180586"))
