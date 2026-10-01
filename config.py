@@ -15,14 +15,14 @@ OWNER_ID = int(os.environ.get("OWNER_ID", "7653921320"))
 ADMINS = [int(x) for x in os.environ.get("ADMINS", "").split() if x.lstrip("-").isdigit()]
 
 MAX_FSUB = 6  # maximum force-sub channels
-AUTO_DELETE_TIME = int(os.environ.get("AUTO_DELETE_TIME", "600"))
+AUTO_DELETE_TIME = int(os.environ.get("AUTO_DELETE_TIME", "900"))
 PROTECT_CONTENT = os.environ.get("PROTECT_CONTENT", "False").lower() == "true"
-START_PIC = os.environ.get("START_PIC", "")
+START_PIC = os.environ.get("START_PIC", "https://ibb.co/gZRGmmxZ")
 
 START_MSG = (
-    "⚡ <b>Hey, {first} ~</b>\n\n"
-    "<b>I AM A SIMPLE YET POWERFUL PRIVATE FILE SHARING BOT, "
-    "WORK FOR @Anime_Hub_Tamkl.</b>"
+    "⚡ <b><blockquote>Hey, {first} ~</blockquote></b>\n\n"
+    "<b><blockquote>I AM A SIMPLE YET POWERFUL PRIVATE FILE SHARING BOT, "
+    "WORK FOR @Anime_Hub_Tamkl.</blockquote></b>"
 )
 FORCE_MSG = (
     "⚠️ <b>Hey, {first} ~</b>\n\n"
