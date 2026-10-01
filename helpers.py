@@ -119,3 +119,31 @@ async def autodelete_worker(client):
         except Exception as e:
             log.error("autodelete worker: %s", e)
         await asyncio.sleep(15)
+        
+
+# ---------- url shortener ----------
+async def shorten(domain, api, url):
+    """Standard shortener API: https://domain/api?api=KEY&url=LINK. Returns short link or None."""
+    domain = domain.replace("https://", "").replace("http://", "").strip("/")
+    try:
+        timeout = aiohttp.ClientTimeout(total=15)
+        async with aiohttp.ClientSession(timeout=timeout) as s:
+            async with s.get(f"https://{domain}/api", params={"api": api, "url": url}) as r:
+                text = (await r.text()).strip()
+        try:
+            data = json.loads(text)
+        except ValueError:
+            data = None
+        if isinstance(data, dict):
+            for k in ("shortenedUrl", "shortened_url", "short_url", "shortUrl"):
+                v = data.get(k)
+                if v and str(v).startswith("http"):
+                    return str(v)
+            log.warning("shortener gave no link: %s", text[:200])
+            return None
+        if text.startswith("http"):
+            return text
+        log.warning("shortener bad response: %s", text[:200])
+    except Exception as e:
+        log.warning("shortener failed: %s", e)
+    return None
