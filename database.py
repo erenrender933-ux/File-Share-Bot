@@ -15,6 +15,8 @@ class Database:
         self.requests = d.join_requests
         self.deletes = d.pending_deletes
         self.settings = d.settings
+        self.tokens = d.tokens
+        self.verified = d.verified
 
     async def setup(self):
         await self.requests.create_index([("chat_id", 1), ("user_id", 1)], unique=True)
