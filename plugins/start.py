@@ -125,9 +125,10 @@ async def start_cmd(client, message):
                 [B("🤖 About Me", callback_data="about"), B("Settings ⚙️", callback_data="settings")],
                 [B("Close ✖️", callback_data="close")],
             ])
+            effect = {"message_effect_id": config.START_EFFECT} if config.START_EFFECT else {}
             if config.START_PIC:
-                return await client.send_photo(uid, config.START_PIC, caption=text, reply_markup=kb)
-            return await client.send_message(uid, text, reply_markup=kb)
+                return await client.send_photo(uid, config.START_PIC, caption=text, reply_markup=kb, **effect)
+            return await client.send_message(uid, text, reply_markup=kb, **effect)
 
         payload = message.command[1]
 
