@@ -3,15 +3,15 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-API_ID = int(os.environ.get("API_ID", "0"))
-API_HASH = os.environ.get("API_HASH", "")
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
+API_ID = int(os.environ.get("API_ID", "15055049"))
+API_HASH = os.environ.get("API_HASH", "abe3f66fcd80c91e53009ba52c7b3a83")
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "8878678087:AAFjPiQn-Q_hYV5dT22NdgY9vB3IzLe0spg")
 
-DB_URI = os.environ.get("DB_URI", "")
-DB_NAME = os.environ.get("DB_NAME", "fileshare")
-DB_CHANNEL = int(os.environ.get("DB_CHANNEL", "0"))
+DB_URI = os.environ.get("DB_URI", "mongodb+srv://azeezbashaimran_db_user:F0NZSClydlcL2TBI@cluster0.sjw3p5j.mongodb.net/?appName=Cluster0")
+DB_NAME = os.environ.get("DB_NAME", "azeezbashaimran_db_user")
+DB_CHANNEL = int(os.environ.get("DB_CHANNEL", "-1003950444931"))
 
-OWNER_ID = int(os.environ.get("OWNER_ID", "0"))
+OWNER_ID = int(os.environ.get("OWNER_ID", "7653921320"))
 ADMINS = [int(x) for x in os.environ.get("ADMINS", "").split() if x.lstrip("-").isdigit()]
 
 MAX_FSUB = 6  # maximum force-sub channels
