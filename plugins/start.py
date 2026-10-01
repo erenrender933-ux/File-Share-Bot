@@ -10,15 +10,17 @@ import config
 from database import db
 from helpers import fmt_time, get_link, not_joined, parse_payload
 
-# Status shown under the bot name. Other options: ChatAction.UPLOAD_DOCUMENT, ChatAction.TYPING
-START_ACTION = ChatAction.CHOOSE_STICKER
+STICKER_TIME = 1  # seconds to show "choosing a sticker" first (0 = skip)
 
 
 async def _action_loop(client, chat_id):
-    """Keep the chat status alive (Telegram clears it after ~5 seconds)."""
+    """First 'choosing a sticker', then 'sending a file' until cancelled."""
     try:
+        if STICKER_TIME > 0:
+            await client.send_chat_action(chat_id, ChatAction.CHOOSE_STICKER)
+            await asyncio.sleep(STICKER_TIME)
         while True:
-            await client.send_chat_action(chat_id, START_ACTION)
+            await client.send_chat_action(chat_id, ChatAction.UPLOAD_DOCUMENT)
             await asyncio.sleep(4)
     except asyncio.CancelledError:
         pass
@@ -45,6 +47,7 @@ async def start_cmd(client, message):
     try:
         # plain /start
         if len(message.command) < 2:
+            await asyncio.sleep(STICKER_TIME)
             text = config.START_MSG.format(first=first)
             kb = M([
                 [B("🤖 About Me", callback_data="about"), B("Settings ⚙️", callback_data="settings")],
@@ -59,6 +62,7 @@ async def start_cmd(client, message):
         # force subscribe check (max 6 channels, normal + request mode)
         missing, total = await not_joined(client, uid)
         if missing:
+            await asyncio.sleep(STICKER_TIME)
             rows = []
             for ch in missing:
                 link = await get_link(client, ch)
