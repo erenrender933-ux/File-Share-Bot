@@ -31,7 +31,7 @@ FORCE_MSG = (
     "❗ <b>Facing problems, use:</b> /help"
 )
 DELETE_MSG = (
-    "⚠️ <b>Dᴜᴇ ᴛᴏ ᴄᴏᴘʏʀɪɢʜᴛ ɪssᴜᴇs....</b>\n\n"
+    "<b>⚠️Dᴜᴇ ᴛᴏ ᴄᴏᴘʏʀɪɢʜᴛ ɪssᴜᴇs....</b>\n"
     "<blockquote><b>ʏᴏᴜʀ ғɪʟᴇs ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ᴡɪᴛʜɪɴ {time}. "
     "sᴏ ᴘʟᴇᴀsᴇ ғᴏʀᴡᴀʀᴅ ᴛʜᴇᴍ ᴛᴏ ᴀɴʏ ᴏᴛʜᴇʀ ᴘʟᴀᴄᴇ ғᴏʀ ғᴜᴛᴜʀᴇ ᴀᴠᴀɪʟᴀʙɪʟɪᴛʏ.</b></blockquote>"
 )
@@ -41,7 +41,7 @@ DELETED_MSG = (
     "[♻️ ᴄʟɪᴄᴋ ʜᴇʀᴇ] ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴇʟsᴇ ᴄʟᴏsᴇ ᴛʜɪs ᴍᴇssᴀɢᴇ.</b></blockquote>"
 )
 ABOUT_MSG = (
-    "🤖 <b>Mʏ Nᴀᴍᴇ:</b> Fɪʟᴇ sᴛᴏʀᴇ ʙᴏᴛ V3 🤖\n"
+    "<b>Mʏ Nᴀᴍᴇ:</b> Fɪʟᴇ sᴛᴏʀᴇ ʙᴏᴛ V3 🤖\n"
     "◈ <b>Language:</b> Python 3\n"
     "◈ <b>Library:</b> Pyrogram v2\n"
     "◈ <b>Database:</b> MongoDB\n"
