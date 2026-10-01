@@ -103,6 +103,29 @@ class Database:
     async def remove_delete(self, _id):
         await self.deletes.delete_one({"_id": _id})
 
+ # ---------- shortener tokens / verification ----------
+    async def create_token(self, user_id, payload):
+        token = secrets.token_hex(8)
+        now = time.time()
+        await self.tokens.delete_many({"created": {"$lt": now - 3600}})  # cleanup
+        await self.tokens.insert_one(
+            {"_id": token, "user_id": user_id, "payload": payload, "created": now}
+        )
+        return token
+
+    async def get_token(self, token):
+        return await self.tokens.find_one({"_id": token})
+
+    async def del_token(self, token):
+        await self.tokens.delete_one({"_id": token})
+
+    async def set_verified(self, uid, until):
+        await self.verified.update_one({"_id": uid}, {"$set": {"until": until}}, upsert=True)
+
+    async def is_verified(self, uid):
+        doc = await self.verified.find_one({"_id": uid})
+        return bool(doc) and doc["until"] > time.time()   
+    
     # ---------- settings ----------
     async def get_setting(self, key, default=None):
         doc = await self.settings.find_one({"_id": "main"}) or {}
