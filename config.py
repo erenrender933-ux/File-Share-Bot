@@ -45,7 +45,7 @@ ABOUT_MSG = (
     "◈ <b>Language:</b> Python 3\n"
     "◈ <b>Library:</b> Pyrogram v2\n"
     "◈ <b>Database:</b> MongoDB"\n
-    "◈ <b>Dᴇᴠᴇʟᴏᴘᴇʀ:@Eren_157</b>
+    "◈ <b>Dᴇᴠᴇʟᴏᴘᴇʀ:@Eren_157</b>"
 )
 
 HELP_TEXTS = {
