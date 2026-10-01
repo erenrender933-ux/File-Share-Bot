@@ -36,6 +36,7 @@ async def shortener(client, m):
         f"◈ API: <code>{_mask(await db.get_setting('short_api'))}</code>\n"
         f"◈ Tutorial: <code>{await db.get_setting('tutorial') or 'Not set'}</code>\n"
         f"◈ Premium: <code>{await db.get_setting('premium') or 'Not set'}</code>\n"
+        f"◈ Verify pic: <code>{'Set' if await db.get_setting('verify_pic') else 'Not set'}</code>\n"
         f"◈ Verified hours: <code>{await db.get_setting('verify_hours', 12)}</code>\n"
         f"◈ Bypass min seconds: <code>{await db.get_setting('min_time', 60)}</code>"
     )
@@ -78,6 +79,27 @@ async def setpremium(client, m):
         return await m.reply("Usage: <code>/setpremium https://t.me/youradmin</code>")
     await db.set_setting("premium", m.command[1])
     await m.reply("✅ Premium link saved.")
+
+
+@Client.on_message(filters.command("setverifypic") & filters.private & admin)
+async def setverifypic(client, m):
+    r = m.reply_to_message
+    arg = m.command[1] if len(m.command) > 1 else ""
+    if arg.lower() == "remove":
+        await db.set_setting("verify_pic", "")
+        return await m.reply("✅ Verify picture removed.")
+    if r and r.photo:
+        pic = r.photo.file_id
+    elif arg.startswith("http"):
+        pic = arg
+    else:
+        return await m.reply(
+            "Usage:\nReply to a photo with <code>/setverifypic</code>\n"
+            "or <code>/setverifypic https://link/to/image.jpg</code>\n"
+            "or <code>/setverifypic remove</code>"
+        )
+    await db.set_setting("verify_pic", pic)
+    await m.reply("✅ Verify picture saved.")
 
 
 @Client.on_message(filters.command("setverifytime") & filters.private & admin)
