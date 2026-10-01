@@ -31,9 +31,9 @@ FORCE_MSG = (
     "❗ <b>Facing problems, use:</b> /help"
 )
 DELETE_MSG = (
-    "⚠️ <b>Due to copyright issues....</b>\n\n"
-    "<blockquote><b>Your files will be deleted within {time}. "
-    "So please forward them to any other place for future availability.</b></blockquote>"
+    "⚠️ <b><blockquote>Dᴜᴇ ᴛᴏ ᴄᴏᴘʏʀɪɢʜᴛ ɪssᴜᴇs....</blockquote></b>\n\n"
+    "<blockquote><b>ʏᴏᴜʀ ғɪʟᴇs ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ᴡɪᴛʜɪɴ {time}. "
+    "sᴏ ᴘʟᴇᴀsᴇ ғᴏʀᴡᴀʀᴅ ᴛʜᴇᴍ ᴛᴏ ᴀɴʏ ᴏᴛʜᴇʀ ᴘʟᴀᴄᴇ ғᴏʀ ғᴜᴛᴜʀᴇ ᴀᴠᴀɪʟᴀʙɪʟɪᴛʏ.</b></blockquote>"
 )
 DELETED_MSG = (
     "<b><blockquote>ᴘʀᴇᴠɪᴏᴜs ᴍᴇssᴀɢᴇ ᴡᴀs ᴅᴇʟᴇᴛᴇᴅ 🗑</blockquote></b>\n\n"
