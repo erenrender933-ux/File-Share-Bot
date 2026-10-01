@@ -8,7 +8,7 @@ from pyrogram.types import InlineKeyboardButton as B, InlineKeyboardMarkup as M
 
 import config
 from database import db
-from helpers import fmt_time, get_link, not_joined, parse_payload
+from helpers import fmt_time, get_link, not_joined, parse_payload, shorten
 
 STICKER_TIME = 1  # seconds to show "choosing a sticker" first (0 = skip)
 
@@ -26,6 +26,78 @@ async def _action_loop(client, chat_id):
         pass
     except Exception:
         pass
+
+
+async def _send(client, uid, text, kb=None, pic=None):
+    if pic:
+        try:
+            return await client.send_photo(uid, pic, caption=text, reply_markup=kb)
+        except Exception:
+            pass
+    return await client.send_message(uid, text, reply_markup=kb)
+
+
+# ---------- shortener verification ----------
+async def verify_gate(client, uid, payload):
+    """Return True if a verification message was sent (user must verify first)."""
+    if await db.is_admin(uid):
+        return False
+    if not await db.get_setting("short_on", False):
+        return False
+    if await db.is_verified(uid):
+        return False
+
+    domain = await db.get_setting("short_url")
+    api = await db.get_setting("short_api")
+    if not domain or not api:
+        return False
+
+    token = await db.create_token(uid, payload)
+    deep = f"https://t.me/{client.bot_username}?start=verify_{token}"
+    short = await shorten(domain, api, deep)
+    if not short:  # shortener down -> do not block users
+        await db.del_token(token)
+        return False
+
+    rows = [[B("Click to download your file", url=short)]]
+    extra = []
+    tutorial = await db.get_setting("tutorial")
+    premium = await db.get_setting("premium")
+    if tutorial:
+        extra.append(B("How to Open", url=tutorial))
+    if premium:
+        extra.append(B("Premium", url=premium))
+    if extra:
+        rows.append(extra)
+
+    await _send(client, uid, config.VERIFY_MSG, M(rows), config.VERIFY_PIC)
+    return True
+
+
+async def handle_verify(client, uid, token):
+    doc = await db.get_token(token)
+    if not doc or doc["user_id"] != uid:
+        return await client.send_message(uid, config.EXPIRED_MSG)
+
+    await db.del_token(token)  # single use
+    elapsed = time.time() - doc["created"]
+    retry = f"https://t.me/{client.bot_username}?start={doc['payload']}"
+    retry_kb = M([[B("♻️ Try Again", url=retry)]])
+
+    if elapsed > config.TOKEN_EXPIRE:
+        return await client.send_message(uid, config.EXPIRED_MSG, reply_markup=retry_kb)
+
+    min_time = int(await db.get_setting("min_time", config.MIN_VERIFY_TIME))
+    if elapsed < min_time:
+        return await client.send_message(uid, config.BYPASS_MSG, reply_markup=retry_kb)
+
+    hours = int(await db.get_setting("verify_hours", config.VERIFY_HOURS))
+    await db.set_verified(uid, time.time() + hours * 3600)
+    await client.send_message(
+        uid,
+        config.VERIFIED_MSG.format(hours=hours),
+        reply_markup=M([[B("📥 Get your file", url=retry)]]),
+    )
 
 
 @Client.on_message(filters.command("start") & filters.private)
@@ -59,6 +131,10 @@ async def start_cmd(client, message):
 
         payload = message.command[1]
 
+        # coming back from the short link
+        if payload.startswith("verify_"):
+            return await handle_verify(client, uid, payload[7:])
+
         # force subscribe check (max 6 channels, normal + request mode)
         missing, total = await not_joined(client, uid)
         if missing:
@@ -78,6 +154,10 @@ async def start_cmd(client, message):
         ids = parse_payload(payload)
         if not ids:
             return await client.send_message(uid, "❌ <b>Invalid or expired link.</b>")
+
+        # shortener verification
+        if await verify_gate(client, uid, payload):
+            return
 
         protect = await db.get_setting("protect", config.PROTECT_CONTENT)
         sent = []
