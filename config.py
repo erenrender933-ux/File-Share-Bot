@@ -69,3 +69,40 @@ BOT_COMMANDS = [
     ("cmd", "View basic bot commands (admins)"),
     ("restart", "Forcefully restart the bot (owner)"),
 ]
+# ---------- shortener / verification ----------
+MIN_VERIFY_TIME = int(os.environ.get("MIN_VERIFY_TIME", "60"))  # seconds, faster = bypass
+VERIFY_HOURS = int(os.environ.get("VERIFY_HOURS", "12"))        # how long a user stays verified
+TOKEN_EXPIRE = 600                                              # token valid for 10 minutes
+VERIFY_PIC = os.environ.get("VERIFY_PIC", "")                   # optional image link
+
+VERIFY_MSG = "Your Link is down here click on Short URL.."
+VERIFIED_MSG = (
+    "✅ <b>Verification successful!</b>\n\n"
+    "<blockquote><b>You can now access files for the next {hours} hours.</b></blockquote>"
+)
+BYPASS_MSG = (
+    "⚠️ <b>Bypass detected!</b>\n\n"
+    "<blockquote><b>Please try again and complete the short link properly.</b></blockquote>"
+)
+EXPIRED_MSG = (
+    "❌ <b>Verification link expired or invalid.</b>\n\n"
+    "<blockquote><b>Please try again.</b></blockquote>"
+)
+
+BOT_COMMANDS += [
+    ("shortener", "Shortener settings, on/off"),
+    ("setshorturl", "Set shortener domain"),
+    ("setshortapi", "Set shortener API key"),
+    ("settutorial", "Set How to Open link"),
+    ("setpremium", "Set Premium button link"),
+    ("setverifytime", "Set verified hours"),
+    ("setmintime", "Set bypass minimum seconds"),
+]
+
+HELP_TEXTS["cmd"] += (
+    "\n\n🔗 <b>SHORTENER (admins)</b>\n"
+    "/shortener - status | /shortener on | off\n"
+    "/setshorturl &lt;domain&gt;\n/setshortapi &lt;api&gt;\n"
+    "/settutorial &lt;link&gt;\n/setpremium &lt;link&gt;\n"
+    "/setverifytime &lt;hours&gt;\n/setmintime &lt;seconds&gt;"
+)
